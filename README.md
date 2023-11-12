@@ -1,3 +1,30 @@
+Exp.No : 07
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+&emsp;
+Date : 21.10.2023
+<br>
 # Convolutional Autoencoder for Image Denoising
 
 ## AIM:
@@ -6,38 +33,46 @@ To develop a convolutional autoencoder for image denoising application.
 
 ## Problem Statement and Dataset:
 
-Autoencoder is an unsupervised artificial neural network that is trained to copy its input to output. An autoencoder will first encode the image into a lower-dimensional representation, then decodes the representation back to the image.The goal of an autoencoder is to get an output that is identical to the input. Autoencoders uses MaxPooling, convolutional and upsampling layers to denoise the image.
-We are using MNIST Dataset for this experiment. The MNIST dataset is a collection of handwritten digits. The task is to classify a given image of a handwritten digit into one of 10 classes representing integer values from 0 to 9, inclusively. The dataset has a collection of 60,000 handwrittend digits of size 28 X 28. Here we build a convolutional neural network model that is able to classify to it's appropriate numerical value.
+- Autoencoder is an unsupervised artificial neural network that is trained to copy its input to output.
+- An autoencoder will first encode the image into a lower-dimensional representation, then decodes the representation back to the image.
+- The goal of an autoencoder is to get an output that is identical to the input. Autoencoders uses MaxPooling, convolutional and upsampling layers to denoise the image.
+- We are using MNIST Dataset for this experiment.
+- The MNIST dataset is a collection of handwritten digits.
+- The task is to classify a given image of a handwritten digit into one of 10 classes representing integer values from 0 to 9, inclusively.
+- The dataset has a collection of 60,000 handwrittend digits of size 28 X 28.
+- Here we build a convolutional neural network model that is able to classify to it's appropriate numerical value.
 
-![](1.png)
+<p align="center">
+<img src="https://github.com/Kaushika-Anandh/mnist-classification/blob/main/mnist.png" width="350" height="200">
+</p>
 
 
 ## Convolution Autoencoder Network Model:
 
-![](4.png)
+<p align="center">
+<img src="https://github.com/Kaushika-Anandh/convolutional-denoising-autoencoder/blob/main/4.png" width="650" height="150">
+</p>
 
 
 ## DESIGN STEPS
 
-- Step 1 - Import the necessary libraries and dataset.
-
-- Step 2 -  Load the dataset and scale the values for easier computation.
-
-- Step 3 - Add noise to the images randomly for both the train and test sets.
-- Step 4 - Build the Neural Model using
-    *  Convolutional Layer
+- **Step 1:** Import the necessary libraries and dataset.
+- **Step 2:**  Load the dataset and scale the values for easier computation.
+- **Step 3:** Add noise to the images randomly for both the train and test sets.
+- **Step 4:** Build the Neural Model using
+    * Convolutional Layer
     * Pooling Layer
     * Up Sampling Layer.
     - Make sure the input shape and output shape of the model are identical.
-- Step 5 - Pass test data for validating manually.
-- Step 6 - Plot the predictions for visualization.
+- **Step 5:** Pass test data for validating manually.
+- **Step 6:** Plot the predictions for visualization.
+
 
 ## PROGRAM
-```python
-program developed by : Kaushika A
-reg no : 212221230048
-```
-### Import necessary libraries:
+> Developed by: Kaushika A <br>
+> Register no: 212221230048
+
+**Import necessary libraries**
 ```python
 import pandas as pd
 import numpy as np
@@ -48,7 +83,7 @@ from tensorflow.keras import layers, utils, models
 from tensorflow.keras.datasets import mnist
 ```
 
-### Read the dataset and scale it:
+**Read the dataset and scale it**
 ```python
 (x_train, _), (x_test, _) = mnist.load_data()
 
@@ -61,7 +96,7 @@ x_train_scaled = np.reshape(x_train_scaled, (len(x_train_scaled), 28, 28, 1))
 x_test_scaled = np.reshape(x_test_scaled, (len(x_test_scaled), 28, 28, 1))
 ```
 
-### Add noise to image:
+**Add noise to image**
 ```python
 noise_factor = 0.5
 x_train_noisy = x_train_scaled + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=x_train_scaled.shape)
@@ -71,7 +106,7 @@ x_train_noisy = np.clip(x_train_noisy, 0., 1.)
 x_test_noisy = np.clip(x_test_noisy, 0., 1.)
 ```
 
-### Plot the images:
+**Plot the images**
 ```python
 n = 10
 plt.figure(figsize=(20, 2))
@@ -84,7 +119,7 @@ for i in range(1, n + 1):
 plt.show()
 ```
 
-### Develop an Autoencoder DL Model
+**Develop an Autoencoder DL Model**
 ```python
 input_img = keras.Input(shape=(28, 28, 1))
 
@@ -114,7 +149,7 @@ autoencoder = keras.Model(input_img, decoded)
 autoencoder.summary()
 ```
 
-### Compile and Fit the model:
+**Compile and Fit the model**
 ```python
 autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
 
@@ -125,18 +160,18 @@ autoencoder.fit(x_train_noisy, x_train_scaled,
                 validation_data=(x_test_noisy, x_test_scaled))
 ```
 
-### Plot Metrics Graph:
+**Plot Metrics Graph**
 ```python
 metrics = pd.DataFrame(autoencoder.history.history)
 metrics[['loss','val_loss']].plot()
 ```
 
-### Predict Using the model:
+**Predict Using the model**
 ```python
 decoded_imgs = autoencoder.predict(x_test_noisy)
 ```
 
-### Plot the original, noisy & reconstructed images:
+**Plot the original, noisy & reconstructed images**
 ```python
 n = 10
 plt.figure(figsize=(20, 4))
@@ -168,13 +203,13 @@ plt.show()
 ## OUTPUT
 
 ### Training Loss, Validation Loss Vs Iteration Plot:
-![](2.png)
+<img src="https://github.com/Kaushika-Anandh/convolutional-denoising-autoencoder/blob/main/2.png" width="400" height="300">
 
 
 
 ### Original vs Noisy Vs Reconstructed Image:
 
-![](3.png)
+<img src="https://github.com/Kaushika-Anandh/convolutional-denoising-autoencoder/blob/main/3.png" width="550" height="100">
 
 
 
