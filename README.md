@@ -46,6 +46,16 @@ To develop a convolutional autoencoder for image denoising application.
 <img src="https://github.com/Kaushika-Anandh/mnist-classification/blob/main/mnist.png" width="350" height="200">
 </p>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ## Convolution Autoencoder Network Model:
 
